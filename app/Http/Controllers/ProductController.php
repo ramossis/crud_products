@@ -3,8 +3,9 @@
 namespace App\Http\Controllers;
 
 use App\Models\Product;
+use App\Models\Store;
+use App\Models\Category;
 use Illuminate\Http\Request;
-
 class ProductController extends Controller
 {
     /**
@@ -14,7 +15,8 @@ class ProductController extends Controller
      */
     public function index()
     {
-        return view('productos.index');
+        $products=Product::all();
+        return view('productos.index',compact('products'));
     }
 
     /**
@@ -24,7 +26,9 @@ class ProductController extends Controller
      */
     public function create()
     {
-        return view('productos.create');
+        $stores=Store::all();
+        $categories=Category::all();
+        return view('productos.create',compact('stores','categories'));
     }
 
     /**
@@ -35,7 +39,16 @@ class ProductController extends Controller
      */
     public function store(Request $request)
     {
-        dd($request);
+        $product=Product::create([
+            'category_id'=>$request->category_id,
+            'store_id'=>$request->store_id,
+            'name'=>$request->name,
+            'slug'=>$request->slug,
+            'price'=>$request->price,
+            'description'=>$request->description
+        ]);
+        $product->save();
+        return redirect(route('products.index'));
     }
 
     /**
@@ -46,7 +59,7 @@ class ProductController extends Controller
      */
     public function show(Product $product)
     {
-        //
+        return view('productos.show',compact('product'));
     }
 
     /**
@@ -57,7 +70,9 @@ class ProductController extends Controller
      */
     public function edit(Product $product)
     {
-        //
+        $stores=Store::all();
+        $categories=Category::all();
+        return view('productos.edit',compact('product','stores','categories'));
     }
 
     /**
@@ -69,7 +84,10 @@ class ProductController extends Controller
      */
     public function update(Request $request, Product $product)
     {
-        //
+        $product->update($request->all());
+        $product->save();
+
+        return redirect()->route('products.index')->with('success', 'Categoría actualizada con éxito.');
     }
 
     /**
@@ -80,6 +98,9 @@ class ProductController extends Controller
      */
     public function destroy(Product $product)
     {
-        //
+        
+        $product->delete();
+        return redirect()->route('products.index')
+        ->with('sucess','Registro Eliminado');
     }
 }

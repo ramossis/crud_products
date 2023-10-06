@@ -6,10 +6,11 @@
         <div class="col-md-8">
             <div class="card">
                 <div class="card-header">{{ __('Register') }}</div>
-                <div class="card-body">
-                    <form method="POST" action="{{ route('products.store') }}">
-                        @csrf
 
+                <div class="card-body">
+                    <form method="post" action="{{ route('products.update',$product->id) }}">
+                        @csrf
+                        @method('PUT')
                         <div class="row mb-3">
                             <label for="category_id" class="col-md-4 col-form-label text-md-end">{{ __('Categoria') }}</label>
 
@@ -50,7 +51,7 @@
                             <label for="name" class="col-md-4 col-form-label text-md-end">{{ __('Nombre') }}</label>
 
                             <div class="col-md-6">
-                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name">
+                                <input id="name" type="text" class="form-control @error('name') is-invalid @enderror" name="name" required autocomplete="name" value="{{$product->name}}">
 
                                 @error('name')
                                     <span class="invalid-feedback" role="alert">
@@ -64,7 +65,7 @@
                             <label for="sulg" class="col-md-4 col-form-label text-md-end">{{ __('Slug') }}</label>
 
                             <div class="col-md-6">
-                                <input id="sulg" type="text" class="form-control @error('sulg') is-invalid @enderror" name="sulg" required autocomplete="slug">
+                                <input id="sulg" type="text" class="form-control @error('sulg') is-invalid @enderror" name="sulg" required autocomplete="slug" value="{{$product->slug}}">
 
                                 @error('slug')
                                     <span class="invalid-feedback" role="alert">
@@ -77,7 +78,7 @@
                             <label for="price" class="col-md-4 col-form-label text-md-end">{{ __('Precio') }}</label>
 
                             <div class="col-md-6">
-                                <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" required autocomplete="price">
+                                <input id="price" type="text" class="form-control @error('price') is-invalid @enderror" name="price" required autocomplete="price" value="{{$product->price}}">
 
                                 @error('price')
                                     <span class="invalid-feedback" role="alert">
@@ -90,7 +91,7 @@
                             <label for="description" class="col-md-4 col-form-label text-md-end">{{ __('Descripcion') }}</label>
 
                             <div class="col-md-6">
-                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description">
+                                <input id="description" type="text" class="form-control @error('description') is-invalid @enderror" name="description" required autocomplete="description"value="{{$product->description}}">
 
                                 @error('dscription')
                                     <span class="invalid-feedback" role="alert">
@@ -101,8 +102,8 @@
                         </div>
                         <div class="row mb-0">
                             <div class="col-md-6 offset-md-4">
-                                <button type="submit" class="btn btn-primary">
-                                    {{ __('Register') }}
+                                <button type="submit" class="btn btn-success">
+                                    {{ __('Editar') }}
                                 </button>
                             </div>
                         </div>

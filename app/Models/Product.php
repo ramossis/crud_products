@@ -23,12 +23,19 @@ class Product extends Model
         'id','created_at','updated_at'
     ];
 
-    public function sluggable(){
+    public function sluggable():array
+    {
         return [
-            'slug'=>[
-                'source'=>'title'
+            'slug' => [
+                'source' => 'title'
             ]
-            ];
+        ];
+    }
+    public function category(){
+        return $this->belongsTo(Category::class,'category_id');
+    }
+    public function store(){
+        return $this->belongsTo(Store::class,'store_id');
     }
 
 }

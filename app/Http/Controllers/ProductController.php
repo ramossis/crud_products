@@ -1,7 +1,7 @@
 <?php
 
 namespace App\Http\Controllers;
-
+use App\Http\Requests\ProductRequest;
 use App\Models\Product;
 use App\Models\Store;
 use App\Models\Category;
@@ -13,10 +13,13 @@ class ProductController extends Controller
      *
      * @return \Illuminate\Http\Response
      */
-    public function index()
+    public function index(Request $request)
     {
-        $products=Product::all();
-        return view('productos.index',compact('products'));
+        $search=$request->search;
+        $products=Product::where('name','LIKE','%'.$request->search.'%')
+        ->latest('id')
+        ->paginate(8);
+        return view('productos.index',compact('products','search'));
     }
 
     /**
@@ -37,7 +40,7 @@ class ProductController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request)
+    public function store(ProductRequest $request)
     {
         $product=Product::create([
             'category_id'=>$request->category_id,

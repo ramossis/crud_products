@@ -15,7 +15,7 @@
 
                 <div class="col-md-8">
                     <div class="input-group ">
-                        <input type="search" name="search" value="{!!old('search', $search ?? '')!!}" class="form-control" placeholder="Buscar noticias...">
+                        <input type="search" name="search" value="{!!old('search', $search ?? '')!!}" class="form-control" placeholder="Buscar Producto.....">
                         <button class="btn btn-dark btn-sm"> <i class='bx bx-search-alt-2'></i> Buscar</button>
                     </div>
                 </div>

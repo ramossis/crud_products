@@ -3,7 +3,9 @@
 @section('title')
     Culking | Categoría
 @stop
-
+@section('menu')
+    @include('layouts.menu')
+@endsection
 @section('content')
     <div class="container">
         <div class="p-4 rounded">
@@ -42,10 +44,10 @@
                         <tr>
                             <td>{{ $i++ }}</td>
                             <td>
-                                <span>{{ $product->category_id }}</span><br>
+                                <span>{{ $product->category->nombre }}</span><br>
                             </td>
                             <td>
-                                <span>{{$product->store_id}}</span>
+                                <span>{{$product->store->nombre}}</span>
                             </td>
                             <td>
                                 <span>{{$product->name}}</span>

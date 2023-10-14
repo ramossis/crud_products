@@ -1,9 +1,7 @@
 <div class="row form-group">
     <div class="row">
-        <div class="col-md-6 mb-3">
-            <label for="category_id" class="form-label">Catgeoria:</label><b class="text-danger"> *</b>
-
             <div class="col-md-6">
+                <label for="category_id">Catgeoria:</label><b class="text-danger"> *</b>
                 <select class="form-control @error('category_id') is-invalid @enderror" name="category_id" id="category_id" required>
                     <option value="">--Seleccione una Categoria--</option>
                     @foreach ($categories as $val)
@@ -16,8 +14,8 @@
                     </span>
                 @enderror
             </div>
-            <label for="store_id" class="form-label">Almacen</label><b class="text-danger"> *</b>
             <div class="col-md-6">
+                <label for="store_id">Almacen</label><b class="text-danger"> *</b>
                 <select class="form-control @error('category_id') is-invalid @enderror" name="store_id" id="store_id" required>
                     <option value="">--Seleccione un Almacen--</option>
                     @foreach ($stores as $val)
@@ -57,32 +55,31 @@
             @enderror
 
             -->
-        </div>
        
     </div>
 
     <div class="row">
-        <div class="col-md-3 text-center">
+        <div class="col-md-6 ">
             <label for="name" class="form-label">Nombre:</label><b class="text-danger"> *</b>
-            <input type="text" class="form-control" id="name" name="name">
+            <input type="text" class="form-control" id="name" name="name"value="{{ old('name', $product->name ?? '') }}">
             @error('name')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
 
         </div>
 
-        <div class="col-md-6 text-center">
+        <div class="col-md-6 ">
             <label for="price" class="form-label">Precio:</label><b class="text-danger"> *</b>
-            <input type="number" class="form-control" id="price" name="price">
+            <input type="number" class="form-control" id="price" name="price" value="{{ old('price', $product->price ?? '') }}">
             @error('price')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
 
         </div>
 
-        <div class="col-md-12 text-center">
+        <div class="col-md-12">
             <label for="description" class="form-label">Descripcion:</label><b class="text-danger"> *</b>
-            <textarea class="form-control" id="description" name="description" rows="8" placeholder="Descripcion"></textarea>
+            <textarea class="form-control" id="description" name="description" rows="8" placeholder="Descripcion">{{ old('description', $product->description ?? '') }} </textarea>
             @error('description')
                 <small class="text-danger">{{ $message }}</small>
             @enderror
